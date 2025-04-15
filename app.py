@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 # Carrega variáveis de ambiente
 load_dotenv()
 
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'sua_chave_secreta'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')  
