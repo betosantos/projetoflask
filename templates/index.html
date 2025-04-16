@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Capturar Localização</title>
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <title>Pessoas</title>
 </head>
-
 <body>
-  <h1>Capturando sua localização...</h1>
+    <h1>Lista de Pessoas</h1>
+    <ul>
+        {% for pessoa in pessoas %}
+        <li>{{ pessoa.nome }} - {{ pessoa.email }}</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>

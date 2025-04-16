@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Pessoa</title>
+</head>
+<body>
+    <h1>Cadastro de Pessoa</h1>
+    <form action="{{ url_for('add') }}" method="POST">
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" required><br>
+
+        <button type="submit">Salvar</button>
+    </form>
+    <br>
+
+    <h2>Pessoas Cadastradas</h2>
+    <ul>
+
+        {% if pessoas %}
+            {% for pessoa in pessoas %}
+                <li>{{ pessoa.nome }} - {{ pessoa.email }}</li>
+            {% endfor %}
+        {% else %}
+            <p>Nenhum registro encontrado! </p>
+        {% endif %}
+    </ul>
+</body>
+</html>
