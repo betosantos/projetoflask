@@ -1,14 +1,10 @@
 import os
-from flask import Flask, render_template, request, jsonify, url_for, redirect
-from datetime import datetime
+from flask import Flask, render_template, request, redirect, url_for
 from models import Pessoa
 from dotenv import load_dotenv
-from flask_sqlalchemy import SQLAlchemy
 from db import db
 
 load_dotenv()
-
-
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'chave_padrao')
@@ -23,8 +19,8 @@ def home():
 
 @app.route('/pessoas')
 def index():    
-   pessoas = Pessoa.query.all()    
-   return render_template('index.html', pessoas=pessoas)
+    pessoas = Pessoa.query.all()
+    return render_template('index.html', pessoas=pessoas)
 
 @app.route('/form')
 def form():
@@ -38,7 +34,6 @@ def add():
     nova_pessoa = Pessoa(nome=nome, email=email)
     db.session.add(nova_pessoa)
     db.session.commit()
-
     return redirect(url_for('form'))
 
 # Criar tabelas ao subir
@@ -47,4 +42,4 @@ with app.app_context():
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port, debug=True)
+    app.run(host="0.0.0.0", port=port)
