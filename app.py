@@ -1,6 +1,5 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for
-from db import db
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 
@@ -9,11 +8,12 @@ load_dotenv()
 app = Flask(__name__)
 
 # Configuração do banco de dados MySQL
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:AjdObfnXSVPSnIzUmZYpaUCLkPXKZUTr@tramway.proxy.rlwy.net:55888/railway'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:AjdObfnXSVPSnIzUmZYpaUCLkPXKZUTr@tramway.proxy.rlwy.net:55888/railway'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
 db = SQLAlchemy(app)
+print(db)
 
 @app.route('/')
 def home():    
