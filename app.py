@@ -4,39 +4,39 @@ from datetime import datetime
 from models import db, Pessoa
 from dotenv import load_dotenv
 
-#load_dotenv()
+load_dotenv()
 
 app = Flask(__name__)
-#app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'chave_padrao')
-#app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
-#app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'chave_padrao')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-#db.init_app(app)
+db.init_app(app)
 
 
 @app.route('/')
 def home():    
     return render_template('index.html')
 
-#@app.route('/pessoas')
-#def index():    
-#    pessoas = Pessoa.query.all()    
-#    return render_template('index.html', pessoas=pessoas)
+@app.route('/pessoas')
+def index():    
+   pessoas = Pessoa.query.all()    
+   return render_template('index.html', pessoas=pessoas)
 
-#@app.route('/form')
-#def form():
-#    pessoas = Pessoa.query.all()    
-#    return render_template('form.html', pessoas=pessoas)
+@app.route('/form')
+def form():
+    pessoas = Pessoa.query.all()    
+    return render_template('form.html', pessoas=pessoas)
 
-#@app.route('/add', methods=['POST'])
-#def add():
-#    nome = request.form['nome']
-#    email = request.form['email']
-#    nova_pessoa = Pessoa(nome=nome, email=email)
-#    db.session.add(nova_pessoa)
-#    db.session.commit()
+@app.route('/add', methods=['POST'])
+def add():
+    nome = request.form['nome']
+    email = request.form['email']
+    nova_pessoa = Pessoa(nome=nome, email=email)
+    db.session.add(nova_pessoa)
+    db.session.commit()
 
-# return redirect(url_for('form'))
+    return redirect(url_for('form'))
 
 # Criação das tabelas se ainda não existirem
 #with app.app_context():
