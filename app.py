@@ -4,6 +4,7 @@ from datetime import datetime
 from models import Pessoa
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
+from db import db
 
 load_dotenv()
 
@@ -14,6 +15,7 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'chave_padrao')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+db.init_app(app)
 
 @app.route('/')
 def home():    
@@ -39,9 +41,9 @@ def add():
 
     return redirect(url_for('form'))
 
-# Criação das tabelas se ainda não existirem
-#with app.app_context():
-#    db.create_all()
+# Criar tabelas ao subir
+with app.app_context():
+    db.create_all()
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
