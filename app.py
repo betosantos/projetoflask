@@ -7,13 +7,14 @@ from flask_sqlalchemy import SQLAlchemy
 
 load_dotenv()
 
+db = SQLAlchemy()  # instância global
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'chave_padrao')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-#db.init_app(app)
-db = SQLAlchemy()
+db.init_app(app)
 
 
 @app.route('/')
