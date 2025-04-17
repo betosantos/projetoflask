@@ -1,7 +1,7 @@
 import os
 from flask import Flask, render_template, request, jsonify, url_for, redirect
 from datetime import datetime
-from models import db, Pessoa
+from models import Pessoa
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 
