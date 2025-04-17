@@ -4,11 +4,13 @@
     <title>Pessoas</title>
 </head>
 <body>
+    
     <h1>Lista de Pessoas</h1>
     <ul>
-        {% for pessoa in pessoas %}
-        <li>{{ pessoa.nome }} - {{ pessoa.email }}</li>
+        {% for usuario in usuarios %}
+        <li>{{ usuario.nome }} - {{ usuario.email }}</li>
         {% endfor %}
     </ul>
+
 </body>
 </html>

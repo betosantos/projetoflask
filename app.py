@@ -21,7 +21,9 @@ with app.app_context():
 
 @app.route('/')
 def home():    
-    return render_template('index.html')
+    usuarios = Usuario.query.all()
+    return render_template('index.html', usuarios=usuarios)
+
 
 
 @app.route('/form', methods=['GET', 'POST'])
