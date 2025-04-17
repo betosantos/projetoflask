@@ -1,8 +1,7 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for
-from models import Pessoa
-from dotenv import load_dotenv
 from db import db
+from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -11,7 +10,10 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'chave_padrao')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db.init_app(app)
+db.init_app(app)  # <-- aqui dá erro se importar Pessoa antes disso
+
+from models import Pessoa  # <-- só importa depois de db.init_app(app)
+
 
 @app.route('/')
 def home():    
