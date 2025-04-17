@@ -13,6 +13,7 @@ app = Flask(__name__)
 
 #db.init_app(app)
 
+
 @app.route('/')
 def home():    
     return render_template('index.html')
