@@ -318,7 +318,7 @@ h6 {
 
 .footer .copyright {
   padding-top: 25px;
-  border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+  /*border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%); */
 }
 
 .footer .credits {
@@ -539,7 +539,7 @@ section,
 .hero h2 {
   margin: 0;
   font-size: 64px;
-  font-weight: 700;
+  font-weight: 700;  
 }
 
 .hero p {
