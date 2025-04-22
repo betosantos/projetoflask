@@ -22,20 +22,23 @@ with app.app_context():
 @app.route('/')
 def home():    
     usuarios = Usuario.query.all()
-    return render_template('index.html', usuarios=usuarios)
+    #return render_template('index.html', usuarios=usuarios)
+    return render_template('base.html')
 
 
 
 @app.route('/form', methods=['GET', 'POST'])
 def form():
+    usuarios = Usuario.query.all()
+    print(usuarios)
     if request.method == 'POST':
         nome = request.form['nome']
         email = request.form['email']
         novo_usuario = Usuario(nome=nome, email=email)
         db.session.add(novo_usuario)
         db.session.commit()
-        return redirect(url_for('home'))
-    return render_template('form.html')
+        return redirect(url_for('home'))    
+    return render_template('form.html', usuarios=usuarios)
 
 
 

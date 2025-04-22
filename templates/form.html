@@ -19,8 +19,10 @@
 
     <h2>Pessoas Cadastradas</h2>
     <ul>
-
-      
+        {% for usuario in usuarios %}
+        <li>{{ usuario.nome }} - {{ usuario.email }}</li>
+        {% endfor %}
     </ul>
+    
 </body>
 </html>
