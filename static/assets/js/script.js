@@ -1,4 +1,4 @@
-window.onload = () => {
+window.onload = () => {  
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         position => {
@@ -30,4 +30,22 @@ window.onload = () => {
       alert('Seu navegador não suporta geolocalização.');
     }
   };
+
+
+  
+  async function enviarFormulario(event) {
+      event.preventDefault(); // evita o recarregamento da página
+      
+      const formData = new FormData(document.getElementById('formulario'));
+      
+      const resposta = await fetch('/contato', {
+          method: 'POST',
+          body: formData
+      });
+
+      const data = await resposta.json();
+      document.getElementById('mensagem').textContent = data.mensagem;
+      document.getElementById('formulario').reset(); // limpa o formulário
+  }
+
   

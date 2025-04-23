@@ -1,9 +1,9 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 from db import db
-from models import Usuario
+from models import Usuario, Formcontato
 load_dotenv()
 
 app = Flask(__name__)
@@ -39,6 +39,20 @@ def form():
         db.session.commit()
         return redirect(url_for('home'))    
     return render_template('form.html', usuarios=usuarios)
+
+
+
+@app.route('/contato', methods=['GET', 'POST'])
+def contato():
+    if request.method == 'POST':
+        nome = request.form['nome']
+        email =  request.form['email']
+        assunto = request.form['assunto']
+        mensagem = request.form['mensagem']
+        novo_contato = Formcontato(nome=nome, email=email, assunto=assunto, mensagem=mensagem)
+        db.session.add(novo_contato)
+        db.session.commit()        
+        return jsonify({"mensagem": "Mensagem recebida com sucesso!"})
 
 
 
