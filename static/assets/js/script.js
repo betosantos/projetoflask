@@ -48,4 +48,26 @@ window.onload = () => {
       document.getElementById('formulario').reset(); // limpa o formulário
   }
 
+
+  function mostrarAlerta(mensagem, tipo) {
+    const container = document.getElementById('alerta-container');
+  
+    const alerta = document.createElement('div');
+    alerta.className = `alert alert-${tipo} alert-dismissible fade show`;
+    alerta.role = 'alert';
+    alerta.innerHTML = `
+      ${mensagem}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+  
+    container.innerHTML = ''; // Remove alertas anteriores
+    container.appendChild(alerta);
+  
+    // Fecha automaticamente após 5 segundos
+    setTimeout(() => {
+      alerta.classList.remove('show');
+      alerta.classList.add('hide');
+      setTimeout(() => alerta.remove(), 300); // Espera a animação
+    }, 5000);
+  }
   
