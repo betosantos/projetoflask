@@ -20,11 +20,11 @@ with app.app_context():
 
 @app.before_request
 def registrar_acesso():
-    if request.endpoint not in ('static'):
+    if request.endpoint not in ('static',):
         novo_acesso = Acesso(
-            ip=request.remote_addr,
-            url=request.path,
-            user_agent=request.headers.get('User-Agent')
+            ip=request.remote_addr or '',
+            url=request.path or '',
+            user_agent=request.headers.get('User-Agent') or ''
         )
         db.session.add(novo_acesso)
         db.session.commit()

@@ -32,6 +32,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/swiper/swipper-bundle.min.css') }}"  >
   <!-- Main CSS File -->
   <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}" >  
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 </head>
 
 
@@ -62,7 +63,7 @@
         <div class="row justify-content-center">
           <div class="col-lg-9">
             <h2>Tecnologia da Informação</h2>
-            <p>Sou,  <b><i><span class="typed" data-typed-items="Desenvolvedor Web, Consultor de Tecnologia da Informação, Freelancer">Designer</span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span></b></i></p>
+            <p>Sou,  <b><i><span class="typed" data-typed-items="Desenvolvedor Web, Consultor de Tecnologia, Freelancer">Designer</span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span></b></i></p>
             <!--<div class="social-links">
               <a href="#"><i class="bi bi-twitter-x"></i></a>
               <a href="#"><i class="bi bi-facebook"></i></a>
@@ -102,7 +103,7 @@
               </div>
               
               <!-- Coluna do Texto -->
-              <div class="col-md-7">
+              <div class="col-md-7 mt-3">
                 
                 <h2><b>Consultoria em Tecnologia da Informação.</b></h2>
                 <p class="fst-italic py-1">
@@ -134,9 +135,11 @@
 
 
 
+
+
+
     <!-- Resume Section -->
     <section id="resume" class="resume section">
-
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Resumo</h2>
@@ -144,14 +147,13 @@
       </div><!-- End Section Title -->
 
       <div class="container">
-
         <div class="row">
 
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
             <h3 class="resume-title">Sumário Profissional</h3>
 
             <div class="resume-item pb-0">
-              <h4>José Roberto O. Santos</h4>
+              <h4>José Roberto Oliveira</h4>
               <p><em>Profissional com sólida experiência na área de Tecnologia da Informação, atuando ao longo dos anos no desenvolvimento, manutenção e suporte de sistemas e infraestrutura tecnológica. Possui amplo conhecimento em linguagens de programação, bancos de dados, redes, segurança da informação.</em></p>
               <ul>              
                 <li>Celular.: (11) 99610-8766</li>
@@ -202,12 +204,77 @@
 
           </div>
         </div>
-      </div>
+      </div>      
+
     </section><!-- /Resume Section -->
 
  
+
+
+  <!-- Services Section -->
+  <section id="portfolio" class="portfolio section py-5">  
+    <div class="container">
+
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Portfólio</h2>          
+        </div><!-- End Section Title -->
+
+      <div class="row g-4">
+
+          <div class="col-md-4">
+            <div class="card border-0 shadow-sm">
+              <div class="overflow-hidden rounded">
+                <img src="{{ url_for('static', filename="assets/img/simobi.png") }}" class="img-fluid portfolio-img" alt="Projeto 1">
+              </div>
+              <div class="card-body text-center">
+                <h5 class="card-title">Site Institucional</h5>
+                <p class="card-text">Layout moderno, responsivo e otimizado para SEO.</p>
+                <a href="#" class="btn btn-outline-primary btn-sm">Ver projeto</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+          <div class="card border-0 shadow-sm">
+            <div class="overflow-hidden rounded">
+              <img src="{{ url_for('static', filename="assets/img/supersipat.png") }}" class="img-fluid portfolio-img" alt="Projeto 1">
+            </div>
+            <div class="card-body text-center">
+              <h5 class="card-title">Site Institucional</h5>
+              <p class="card-text">Layout moderno, responsivo e otimizado para SEO.</p>
+              <a href="#" class="btn btn-outline-primary btn-sm">Ver projeto</a>
+            </div>
+          </div>
+        </div>
+
+         
+        <div class="col-md-4">
+          <div class="card border-0 shadow-sm">
+            <div class="overflow-hidden rounded">
+              <img src="{{ url_for('static', filename="assets/img/megalojatop.png") }}" class="img-fluid portfolio-img" alt="Projeto 1">
+            </div>
+            <div class="card-body text-center">
+              <h5 class="card-title">Site Institucional</h5>
+              <p class="card-text">Layout moderno, responsivo e otimizado para SEO.</p>
+              <a href="#" class="btn btn-outline-primary btn-sm">Ver projeto</a>
+            </div>
+          </div>
+        </div>
+        
+    
+
+      </div>
+    </div>
+  </section>
+
+  
+
+
+
+
     <!-- Services Section -->
-    <section id="services" class="services section">
+    <section id="services" class="services section mt-5">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
@@ -216,7 +283,6 @@
       </div><!-- End Section Title -->
 
       <div class="container">
-
         <div class="row gy-4">
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
