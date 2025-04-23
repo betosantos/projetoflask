@@ -44,7 +44,7 @@ window.onload = () => {
       });
 
       const data = await resposta.json();
-      document.getElementById('mensagem').textContent = data.mensagem;
+      document.getElementById('msgform').textContent = data.mensagem;
       document.getElementById('formulario').reset(); // limpa o formulário
   }
 
