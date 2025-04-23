@@ -1,5 +1,7 @@
-
+from datetime import datetime
+from zoneinfo import ZoneInfo
 from db import db
+
 
 class Usuario(db.Model):    
     id = db.Column(db.Integer, primary_key=True)
@@ -19,3 +21,11 @@ class Formcontato(db.Model):
 
     def __repr__(self):
         return f'<Contato {self.nome}>'
+    
+
+class Acesso(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    ip = db.Column(db.String(50))
+    url = db.Column(db.String(200))
+    user_agent = db.Column(db.String(300))
+    timestamp = db.Column(db.DateTime, default=lambda: datetime.now(ZoneInfo("America/Sao_Paulo")))

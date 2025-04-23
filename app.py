@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 from db import db
-from models import Usuario, Formcontato
+from models import Usuario, Formcontato, Acesso
 load_dotenv()
 
 app = Flask(__name__)
@@ -17,6 +17,17 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
+
+@app.before_request
+def registrar_acesso():
+    if request.endpoint not in ('static'):
+        novo_acesso = Acesso(
+            ip=request.remote_addr,
+            url=request.path,
+            user_agent=request.headers.get('User-Agent')
+        )
+        db.session.add(novo_acesso)
+        db.session.commit()
 
 
 @app.route('/')
