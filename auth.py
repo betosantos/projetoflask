@@ -20,7 +20,7 @@ def register():
         new_user = Usuario(nome=nome, email=email, senha=senha)
         db.session.add(new_user)
         db.session.commit()
-        return redirect(url_for('auth.login'))
+        return redirect('login.html')
     return render_template('registro.html')
 
 
