@@ -1,39 +1,25 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for, jsonify, session, flash
 from dotenv import load_dotenv
-from flask_sqlalchemy import SQLAlchemy
-from db import db
-from models import Usuario, Formcontato, Acesso
+from models import Usuario, Formcontato
+from db import init_db, db
+from flask_login import LoginManager
+from auth import auth
 load_dotenv()
 
 app = Flask(__name__)
+app.secret_key = os.getenv("SECRET_KEY")
 
-# Configurações do banco
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:AjdObfnXSVPSnIzUmZYpaUCLkPXKZUTr@tramway.proxy.rlwy.net:55888/railway'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-# Inicializa o db com o app
-db.init_app(app)
-# Cria as tabelas
-with app.app_context():
-    db.create_all()
+init_db(app)
 
 
-@app.before_request
-def registrar_acesso():
-    if request.endpoint not in ('static',):
-        novo_acesso = Acesso(
-            ip=request.remote_addr or '',
-            url=request.path or '',
-            user_agent=request.headers.get('User-Agent') or ''
-        )
-        db.session.add(novo_acesso)
-        db.session.commit()
+
+app.register_blueprint(auth)
+
 
 
 @app.route('/')
-def home():    
-    usuarios = Usuario.query.all()
-    #return render_template('index.html', usuarios=usuarios)
+def home():        
     return render_template('base.html')
 
 
@@ -65,6 +51,45 @@ def contato():
         db.session.commit()        
         return jsonify({"mensagem": "Mensagem recebida com sucesso!"})
 
+
+
+#@app.route('/login', methods=['GET', 'POST'])
+#def login():
+#    if request.method == 'POST':
+#        email = request.form['email']
+#        senha = request.form['senha']
+#        
+#        usuario = Usuario.query.filter_by(email=email, senha=senha).first()
+#
+#        if usuario:            
+#            print('Login realizado com sucesso!')
+#            return redirect(url_for('painel'))
+#        else:
+#            print('E-mail ou senha incorretos.')
+#    return render_template('login.html')
+
+
+@app.route('/painel')
+def painel():
+    if 'usuario' not in session:
+        flash('Você precisa estar logado para acessar essa página.', 'warning')
+        return redirect(url_for('login'))
+    
+    return render_template('painel.html', usuario=session['usuario'])
+
+
+
+@app.route('/registro', methods=['GET', 'POST'])
+def registro():
+    if request.method == 'POST':
+        nome = request.form['nome']
+        email = request.form['email']
+        senha = request.form['senha']
+        novo_usuario = Usuario(nome=nome, email=email, senha=senha)
+        db.session.add(novo_usuario)
+        db.session.commit()        
+        return redirect(url_for('login'))
+    return render_template('registro.html')
 
 
 

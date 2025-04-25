@@ -1,16 +1,15 @@
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from db import db
+from flask_login import UserMixin
 
 
-class Usuario(db.Model):    
+class Usuario(db.Model, UserMixin):    
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), nullable=False)
-    
-    def __repr__(self):
-        return f'<Usuario {self.nome}>'
-    
+    senha = db.Column(db.String(200), nullable=False)
+     
 
 class Formcontato(db.Model):    
     id = db.Column(db.Integer, primary_key=True)
@@ -29,3 +28,5 @@ class Acesso(db.Model):
     url = db.Column(db.String(200))
     user_agent = db.Column(db.String(300))
     timestamp = db.Column(db.DateTime, default=lambda: datetime.now(ZoneInfo("America/Sao_Paulo")))
+
+    

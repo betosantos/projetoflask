@@ -4,7 +4,8 @@ python-dotenv==1.0.1
 sqlalchemy
 gunicorn==21.2.0
 pymysql
-
+flask-bcrypt
+flask-login
 
 
 
