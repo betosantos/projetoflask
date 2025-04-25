@@ -34,7 +34,7 @@ def login():
         
         if user and check_password_hash(user.senha, senha):
             session['id'] = user.id            
-            return redirect(url_for('painel'))
+            return redirect(url_for('auth.login'))
         flash('Credenciais inválidas')
     return render_template('login.html')
 
