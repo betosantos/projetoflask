@@ -15,7 +15,7 @@ def registro():
         senha = generate_password_hash(request.form['senha'])
         if Usuario.query.filter_by(email=email).first():
             flash('Usuário já existe')
-            return redirect(url_for('auth.register'))
+            return redirect(url_for('auth.registro'))
 
         new_user = Usuario(nome=nome, email=email, senha=senha)
         db.session.add(new_user)
