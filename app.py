@@ -3,8 +3,9 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify, s
 from dotenv import load_dotenv
 from models import Usuario, Formcontato
 from db import init_db, db
-from flask_login import LoginManager
 from auth import auth
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -12,10 +13,19 @@ app.secret_key = 'sua_chave_ultra_secreta_123456'
 
 init_db(app)
 
+# Configurando o LoginManager
+login_manager = LoginManager()
+login_manager.init_app(app)
 
+# A associação do login_required do Flask-Login
+login_manager.login_view = "auth.login"  # Caso o usuário não esteja autenticado, redireciona para o login
+
+# Função para carregar o usuário
+@login_manager.user_loader
+def load_user(user_id):
+    return Usuario.query.get(int(user_id))
 
 app.register_blueprint(auth)
-
 
 
 @app.route('/')
@@ -53,30 +63,18 @@ def contato():
 
 
 
-#@app.route('/login', methods=['GET', 'POST'])
-#def login():
-#    if request.method == 'POST':
-#        email = request.form['email']
-#        senha = request.form['senha']
-#        
-#        usuario = Usuario.query.filter_by(email=email, senha=senha).first()
-#
-#        if usuario:            
-#            print('Login realizado com sucesso!')
-#            return redirect(url_for('painel'))
-#        else:
-#            print('E-mail ou senha incorretos.')
-#    return render_template('login.html')
-
 
 @app.route('/painel')
+@login_required
 def painel():
-    if 'usuario' not in session:
-        flash('Você precisa estar logado para acessar essa página.', 'warning')
-        return redirect(url_for('login'))
-    
-    return render_template('painel.html', usuario=session['usuario'])
+    return render_template('painel.html', usuario=current_user)  # O usuário logado é automaticamente acessado via current_user
 
+
+
+@app.route('/logout')
+def logout():
+    logout_user()  # Finaliza a sessão do usuário
+    return redirect(url_for('auth.login'))  # Redireciona para a página de login
 
 
 if __name__ == "__main__":
