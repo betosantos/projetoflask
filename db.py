@@ -2,8 +2,9 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 from dotenv import load_dotenv
 import os
-
 load_dotenv()
+
+
 db = SQLAlchemy()
 
 def init_db(app: Flask):
