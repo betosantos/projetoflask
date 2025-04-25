@@ -8,7 +8,7 @@ from auth import auth
 load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = os.getenv("SECRET_KEY")
+app.secret_key = 'sua_chave_ultra_secreta_123456'
 
 init_db(app)
 
