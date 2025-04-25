@@ -36,7 +36,7 @@ def login():
             session['id'] = user.id            
             return redirect(url_for('auth.login'))
         flash('Credenciais inválidas')
-    return render_template('painel.html')
+    return render_template('login.html')
 
 
 
