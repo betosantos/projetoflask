@@ -10,17 +10,19 @@ auth = Blueprint('auth', __name__)
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        username = request.form['username']
-        password = generate_password_hash(request.form['password'])
-        if Usuario.query.filter_by(username=username).first():
+        nome = request.form['nome']
+        email = request.form['email']        
+        senha = generate_password_hash(request.form['senha'])
+        if Usuario.query.filter_by(email=email).first():
             flash('Usuário já existe')
             return redirect(url_for('auth.register'))
 
-        new_user = Usuario(username=username, password=password)
+        new_user = Usuario(nome=nome, email=email, senha=senha)
         db.session.add(new_user)
         db.session.commit()
         return redirect(url_for('auth.login'))
     return render_template('registro.html')
+
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -35,6 +37,7 @@ def login():
             return redirect(url_for('painel'))
         flash('Credenciais inválidas')
     return render_template('login.html')
+
 
 
 @auth.route('/logout')
