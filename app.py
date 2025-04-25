@@ -79,20 +79,6 @@ def painel():
 
 
 
-@app.route('/registro', methods=['GET', 'POST'])
-def registro():
-    if request.method == 'POST':
-        nome = request.form['nome']
-        email = request.form['email']
-        senha = request.form['senha']
-        novo_usuario = Usuario(nome=nome, email=email, senha=senha)
-        db.session.add(novo_usuario)
-        db.session.commit()        
-        return redirect(url_for('login'))
-    return render_template('registro.html')
-
-
-
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=True)

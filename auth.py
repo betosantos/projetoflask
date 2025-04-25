@@ -7,8 +7,8 @@ auth = Blueprint('auth', __name__)
 
 
 
-@auth.route('/register', methods=['GET', 'POST'])
-def register():
+@auth.route('/registro', methods=['GET', 'POST'])
+def registro():
     if request.method == 'POST':
         nome = request.form['nome']
         email = request.form['email']        
@@ -20,7 +20,7 @@ def register():
         new_user = Usuario(nome=nome, email=email, senha=senha)
         db.session.add(new_user)
         db.session.commit()
-        return redirect('login.html')
+        return redirect('auth.login')
     return render_template('registro.html')
 
 
