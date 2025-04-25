@@ -39,7 +39,7 @@ def login():
             print('Sucesso!!')
             return redirect(url_for('painel'))              
         else:
-            print('Erro')
+            flash('Usuário ou senha inválidos', 'danger')
             return redirect(url_for('auth.login'))  
     return render_template('login.html')
 
